@@ -5,6 +5,9 @@ meme.jpg
 # ignore the virtual environment
 .venv/
 
+# ignore the vscode folder
+.vscode/
+
 
 ## PYTHON GITIGNORE TEMPLATE -----------------------------------------------
 
