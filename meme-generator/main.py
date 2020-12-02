@@ -1,3 +1,4 @@
+from config import *
 from generator import *
 from get_speech import *
 from get_random_image import *
@@ -21,7 +22,7 @@ if __name__ == '__main__':
     if img is not None and txt_top is not None and txt_bottom is not None:
         create_meme(txt_top, img, FONT, "top", SPONGEBOB)
         create_meme(txt_bottom, img, FONT, "bottom", SPONGEBOB)
-        img.save("meme.jpg")
+        img.save(output_dir / 'meme.jpg')
         img.show()
     else:
         print("Error: Image or text not valid")

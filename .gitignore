@@ -8,6 +8,9 @@ meme.jpg
 # ignore the vscode folder
 .vscode/
 
+output/*
+!output/.gitkeep
+
 
 ## PYTHON GITIGNORE TEMPLATE -----------------------------------------------
 

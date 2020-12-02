@@ -1,15 +1,16 @@
 import random
 import os
 from PIL import Image
+from pathlib import Path
 
 def get_rand_img(spongebob):
-    path ="input"
+    path = Path.cwd().parent / 'input'
     pics = os.listdir(path)
     if spongebob:
         pics = [item.lower() for item in pics]
-        pics = [file for file in pics if "spongebob" in file]
+        pics = [file for file in pics if 'spongebob' in file]
     random_index = random.randrange(0, len(pics))
-    image_url = "input/" + pics[random_index]
+    image_url = path / pics[random_index]
     try:
         img = Image.open(image_url)
         return img
