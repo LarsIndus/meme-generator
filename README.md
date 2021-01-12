@@ -1,4 +1,4 @@
-# Meme Generator
+# Meme Generator (Fun Project)
 
 Simple meme generator that can use either text input or voice input.
 
@@ -11,7 +11,8 @@ I slightly modified the code and added some additional features like speech reco
 Save the images you want to use in the folder 'input'. As of now, only jpg is working (but can be easily extended).
 Some images have already been added by me.
 
-To generate a meme, simply run main.py. You can change some of the values in this file:
+To generate a meme, simply run main.py or main_oop.py (the latter is just an OOP version that does the same which I only created to practice OOP).
+You can change some of the values in these files:
 If SPEECH is set to False, the user will be asked to input text,
 otherwise Google Speech Recognition will be used.
 In case of voice input, you can set LANGUAGE accordingly.
@@ -19,8 +20,6 @@ In both cases, the user is asked for input two times, where the first will be th
 (as in a typical meme).
 
 The font can be changed but is already set to a typical meme font.
-
-There is a procedural version on the main branch and an oop version on the branch 'oop_version'.
 
 ### Spongebob Mode
 
