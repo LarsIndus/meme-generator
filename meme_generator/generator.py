@@ -1,30 +1,43 @@
-# Simple meme generator
-# Source: https://blog.lipsumarium.com/caption-memes-in-python/
-
 from PIL import ImageFont, ImageDraw
+from PIL.ImageDraw import Draw
+from PIL.Image import Image
 import random
 
-# --------------------------------------------------------------------------------------
-def draw_text(text, draw, font, x, y, offset = 3):
-    """Prints the typical meme font onto an image. Text is in the top left corner."""
+# ----------------------------------------------------------------------------
+def _draw_text(text: str, draw: Draw, x: float, y: float, offset: float = 3,
+              font: str = "impact.ttf") -> None:
+    """
+    Prints font onto an image. Text is in the top left corner.
+    Default font is a typical meme font.
+    
+    text   -- String; the text to be written onto the image.
+    draw   -- object to draw an (PIL.ImageDraw.Draw)
+    x      -- float; x coordinate
+    y      -- float; y coordinate
+    offset -- float; offset parameter to print text multiple times
+    font   -- String; the font to be used, default is a typical meme font
+    """
     draw.text((x - offset, y - offset), text, (0, 0, 0), font = font)
     draw.text((x + offset, y - offset), text, (0, 0, 0), font = font)
     draw.text((x + offset, y + offset), text, (0, 0, 0), font = font)
     draw.text((x - offset, y + offset), text, (0, 0, 0), font = font)
     draw.text((x, y), text, (255, 255, 255), font = font)
 
-def create_meme(text, img, font, pos = "top", spongebob = False):
+def create_meme(text: str, img: Image, font: str = "impact.ttf",
+                pos: str = "top", spongebob: bool = False) -> None:
     """
     Main function of this module.
     Checks whether the text needs multiple lines to fit onto the image
     and splits it accordingly.
     This happens in a way that prevents words from being cut.
-    It then uses the above helper function to print the text centered onto the image.
+    It then uses the above helper function to print the text
+    centered onto the image.
     
     text -- String; the text to be written onto the image.
-    pos  -- String; position of the text, either "top" or "bottom" (default is "top").
-    img  -- an image; opened via Image.open(URL)
-    font -- the font to be used (default is a typical meme font)
+    pos  -- String; position of the text, either "top" or "bottom"
+            (default is "top").
+    img  -- Image; opened via Image.open(URL)
+    font -- String; the font to be used, default is a typical meme font
     """
     
     fontsize = int(img.height * 0.15)
@@ -32,7 +45,8 @@ def create_meme(text, img, font, pos = "top", spongebob = False):
     font_adjusted_size = ImageFont.truetype(font, fontsize)
     draw = ImageDraw.Draw(img)
     
-    # If spongebob mode has been turned on, randomly capitalize letters in the text
+    # If spongebob mode has been turned on,
+    # randomly capitalize letters in the text
     if spongebob:
         new = []
         for char in text:
@@ -43,7 +57,7 @@ def create_meme(text, img, font, pos = "top", spongebob = False):
     else:
         text = text.upper()
     
-    # Get the size of the text and use it to determine the number of lines needed
+    # Get the size of the text and use it to determine the number of lines
     w, h = draw.textsize(text, font_adjusted_size)
     line_count = 1
     if w > img.width:
@@ -56,7 +70,7 @@ def create_meme(text, img, font, pos = "top", spongebob = False):
 
         last_cut = 0
         is_last = False
-        for i in range(0, line_count):
+        for i in range(line_count):
             if last_cut == 0:
                 cut = round((len(text) / line_count) * i)
             else:
@@ -102,9 +116,9 @@ def create_meme(text, img, font, pos = "top", spongebob = False):
     if pos == "bottom":
         last_y = img.height - h * (line_count + 1) - 10
 
-    for i in range(0, line_count):
+    for i in range(line_count):
         w, h = draw.textsize(lines[i], font_adjusted_size)
-        x = img.width/2 - w/2
+        x = (img.width / 2) - (w / 2)
         y = last_y + h
-        draw_text(lines[i], draw, font_adjusted_size, x, y, offset)
+        _draw_text(lines[i], draw, x, y, offset, font_adjusted_size)
         last_y = y
