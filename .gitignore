@@ -2,9 +2,6 @@
 
 meme.jpg
 
-# ignore the virtual environment
-.venv_meme/
-
 # ignore the vscode folder
 .vscode/
 
